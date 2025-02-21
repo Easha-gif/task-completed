@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Home from './components/Routes/Home.jsx';
 import AddTask from './components/Routes/AddTask.jsx';
+import Login from './components/Routes/Login.jsx';
+import ManageTask from './components/Routes/ManageTask.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,15 @@ const router = createBrowserRouter([
       {
         path:'/addTask',
         element:<AddTask></AddTask>
-      }
+      },
+      {
+        path:'/manageTask',
+        element:<ManageTask></ManageTask>
+      },
+      {
+        path:'/login',
+        element:<Login></Login>
+      },
     ]
   },
 ]);

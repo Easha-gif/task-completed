@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -7,7 +7,7 @@ const navItem = (
     <>
     <NavLink to='/' className='text-base font-semibold text-blue-600 mr-6'>Home</NavLink>
     <NavLink to='/addTask' className='text-base font-semibold text-blue-600 mr-6'>Add Task</NavLink>
-    <NavLink to='/' className='text-base font-semibold text-blue-600 mr-6'>Manage Task</NavLink>
+    <NavLink to='/manageTask' className='text-base font-semibold text-blue-600 mr-6'>Manage Task</NavLink>
     </>
 )
 
@@ -46,7 +46,9 @@ const navItem = (
     </ul>
   </div>
   <div className="navbar-end">
+    <Link to='/login'>
     <a className="btn bg-[#4b9dee] text-base font-semibold text-white hover:text-blue-600">Login</a>
+    </Link>
   </div>
 </div>
         </div>
