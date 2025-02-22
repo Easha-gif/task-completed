@@ -50,7 +50,7 @@ Backend: Node.js, Express.js
 
 Database: MongoDB 
 
-
+[Live]{https://strong-sawine-9dfaf7.netlify.app/}
 
 
 
