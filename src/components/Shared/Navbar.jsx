@@ -1,7 +1,32 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Auth/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
+const {handleSignOut ,user,setUser}=useContext(AuthContext)
+
+const signOut=()=>{
+  handleSignOut()
+  .then(()=>{
+    setUser(null)
+    Swal.fire({
+            title: "Sign Out successful!",
+            icon: "warning",
+            draggable: true
+          });
+  })
+  .catch(err=>{
+      console.log(err);
+      Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      })
+}
+
 
 const navItem = (
     <>
@@ -36,9 +61,9 @@ const navItem = (
         {navItem}
       </ul>
     </div>
-    <a className="text-3xl font-bold text-blue-800 flex items-center gap-2">
+    <div className="text-3xl font-bold text-blue-800 flex items-center gap-2">
         <img className="h-14 rounded-full object-cover" src="https://image.shutterstock.com/image-vector/stopwatch-vector-icon-isolated-on-260nw-546713671.jpg" alt="" />
-        Task</a>
+        Task</div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -46,9 +71,11 @@ const navItem = (
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to='/login'>
-    <a className="btn bg-[#4b9dee] text-base font-semibold text-white hover:text-blue-600">Login</a>
-    </Link>
+   {user ?  <Link to='/login'>
+    <button onClick={signOut} className="btn bg-[#4b9dee] text-base font-semibold text-white hover:text-blue-600">Sign-Out</button>
+    </Link>: <Link to='/login'>
+    <button className="btn bg-[#4b9dee] text-base font-semibold text-white hover:text-blue-600">Sign In</button>
+    </Link>}
   </div>
 </div>
         </div>

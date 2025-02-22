@@ -10,6 +10,8 @@ import Home from './components/Routes/Home.jsx';
 import AddTask from './components/Routes/AddTask.jsx';
 import Login from './components/Routes/Login.jsx';
 import ManageTask from './components/Routes/ManageTask.jsx';
+import AuthProvider from './components/Auth/AuthProvider.jsx';
+import Private from './components/Routes/Private.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,11 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path:'/addTask',
-        element:<AddTask></AddTask>
+        element:<Private><AddTask></AddTask></Private>
       },
       {
         path:'/manageTask',
-        element:<ManageTask></ManageTask>
+        element:<Private><ManageTask></ManageTask></Private>
       },
       {
         path:'/login',
@@ -37,6 +39,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-        <RouterProvider router={router} />
+      <AuthProvider>
+      <RouterProvider router={router} />
+      </AuthProvider>
   </StrictMode>,
 )
