@@ -16,11 +16,14 @@ const description=form.description.value
 const userEmail=user?.email
 const userName=user?.displayName
 const taskStatus='Todo'
+const status = "Pending"
+const dueData = form.date.value
+const priority = form.priority.value
 const addTaskData={
-  title,description,userEmail,userName,date:new Date(),taskStatus
+  title,description,userEmail,userName,date:new Date(),taskStatus,status,dueData,priority
 }
-const {data}=axios.post(`${import.meta.env.VITE_APIROUTE}/addTask`,addTaskData)
-.then((res)=>{
+axios.post(`${import.meta.env.VITE_APIROUTE}/addTask`,addTaskData)
+.then(()=>{
   navigate('/manageTask')
    Swal.fire({
           icon: "success",
@@ -39,7 +42,7 @@ const {data}=axios.post(`${import.meta.env.VITE_APIROUTE}/addTask`,addTaskData)
 
 
     return (
-        <div className="md:w-11/12 mx-auto">
+        <div className="md:w-11/12 mx-auto mb-32">
             <h1 className="text-3xl font-bold text-black pt-24 pb-10">Add Task</h1>
 
 <div className="flex justify-center items-center gap-16">
@@ -56,6 +59,23 @@ const {data}=axios.post(`${import.meta.env.VITE_APIROUTE}/addTask`,addTaskData)
             <span className="text-base font-semibold">Description</span>
           </label>
           <input type="text" placeholder="Task Description" name="description" className="input input-bordered" maxLength={200} required />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="text-base font-semibold">Priority</span>
+          </label>
+         <select name="priority" className="input input-bordered" required>
+          <option value="">select priority</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+         </select>
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="text-base font-semibold">Due Date</span>
+          </label>
+          <input type="date" placeholder="Due Date" name="date" className="input input-bordered" required />
         </div>
         <div className="form-control mt-6">
           <button className="btn bg-blue-500 text-white hover:text-blue-600">Add Task</button>

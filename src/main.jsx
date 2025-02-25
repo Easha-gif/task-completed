@@ -16,6 +16,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import UpdateTask from './components/Routes/UpdateTask.jsx';
 
 const queryClient = new QueryClient()
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path:'/manageTask',
         element:<Private><ManageTask></ManageTask></Private>
+      },
+      {
+        path:'/updateTask/:id',
+        element:<Private><UpdateTask></UpdateTask></Private>
       },
       {
         path:'/login',
