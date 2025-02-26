@@ -1,16 +1,23 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Auth/AuthProvider";
 
 
 const UpdateTask = () => {
 
+const {user}=useContext(AuthContext)
 const {id} = useParams()
 const [singleTask , setSingleTask] = useState([])
+const [selectedValue, setSelectedValue] = useState("");
+const navigate=useNavigate()
+// single task load
 useEffect(()=>{
 axios.get(`${import.meta.env.VITE_APIROUTE}/task/${id}`)
 .then((res)=>{
 setSingleTask(res?.data)
+setSelectedValue(res?.data?.priority)
 })
 .catch((err)=>{
 console.log(err);
@@ -19,11 +26,38 @@ console.log(err);
 // task updated function
 const updateTaskFromData=(e)=>{
     e.preventDefault()
-    console.log(e.target);
+    const form=e.target
+    const title=form.title.value
+    const description=form.description.value
+    const userEmail=user?.email
+    const userName=user?.displayName
+    const taskStatus='Todo'
+    const status = "Pending"
+    const dueData = form.date.value
+    const priority = form.priority.value
+    const updateTaskData={
+      title,description,userEmail,userName,date:singleTask?.date,lastUpdateDate:new Date(),taskStatus,status,dueData,priority
+    }
+    axios.put(`${import.meta.env.VITE_APIROUTE}/update/${id}`,updateTaskData)
+    .then(()=>{
+      navigate('/manageTask')
+       Swal.fire({
+              icon: "success",
+              title: "successfully Task Update",
+              text: "Done!",
+            });
+    })
+    .catch(err=>{
+      Swal.fire({
+        icon: "error",
+        title: "wrong",
+        text: "Something wrong!",
+      });
+    })
 }
     return (
         <div className="md:w-11/12 mx-auto mb-32">
-            <h1 className="text-3xl font-bold text-black pt-24 pb-10">Update Task</h1>
+            <h1 className="text-3xl font-bold text-black pt-24">Update Task</h1>
 
 <div className="flex justify-center items-center gap-16">
 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-6">
@@ -44,7 +78,7 @@ const updateTaskFromData=(e)=>{
           <label className="label">
             <span className="text-base font-semibold">Priority</span>
           </label>
-         <select  name="priority" className="input input-bordered" defaultValue={singleTask?.priority}>
+         <select  name="priority" className="input input-bordered"value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
           <option value="">select priority</option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>

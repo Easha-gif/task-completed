@@ -33,6 +33,7 @@ const navItem = (
     <NavLink to='/' className='text-base font-semibold text-blue-600 mr-6'>Home</NavLink>
     <NavLink to='/addTask' className='text-base font-semibold text-blue-600 mr-6'>Add Task</NavLink>
     <NavLink to='/manageTask' className='text-base font-semibold text-blue-600 mr-6'>Manage Task</NavLink>
+    <NavLink to='/dashboard' className='text-base font-semibold text-blue-600 mr-6'>Dashboard</NavLink>
     </>
 )
 
