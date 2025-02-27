@@ -18,7 +18,6 @@ import {
 } from '@tanstack/react-query'
 import UpdateTask from './components/Routes/UpdateTask.jsx';
 import Dashboard from './components/Routes/Dashboard.jsx';
-import DashboardPage from './components/Routes/DashboardPage.jsx';
 
 const queryClient = new QueryClient()
 
@@ -52,12 +51,6 @@ const router = createBrowserRouter([
   {
     path:'/dashboard',
     element:<Private><Dashboard></Dashboard></Private>,
-    children:[
-      {
-        path:'/dashboard',
-        element:<DashboardPage></DashboardPage>
-      }
-    ]
   }
 ]);
 

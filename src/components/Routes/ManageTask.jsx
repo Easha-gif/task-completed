@@ -42,7 +42,7 @@ Swal.fire({
             <h1 className="text-3xl font-bold pt-24 pb-10">Manage Task</h1>
 {data?.length == 0 && <p className="text-2xl font-bold text-red-300 text-center">No Task you are added</p>}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-40">
-  {data?.map(task=><TaskCard  key={task._id} heading={'ToDO'}  task={task} handleDelete={handleDelete}>
+  {data?.map(task=><TaskCard  key={task._id} task={task} handleDelete={handleDelete}>
     </TaskCard>
   )}
 </div>
